@@ -4,7 +4,7 @@ import { ContactForm } from '@/components/ContactForm'
 import { projects } from '@/data/projects'
 import { skills } from '@/data/skills'
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className='min-h-screen bg-gray-50 dark:bg-gray-900'>
       {/* Header */}
