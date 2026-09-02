@@ -43,3 +43,9 @@ next-env.d.ts
 .claude
 .cursor
 .taskmaster
+
+# playwright mcp scratch
+.playwright-mcp
+
+# impeccable skill state
+.impeccable
