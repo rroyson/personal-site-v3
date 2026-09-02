@@ -62,10 +62,11 @@ Confirmed real strengths, all four, in rough lead order:
 
 - **Experience:** 10 years, confirmed by Rob. State it as "10 years" or "a decade", not "5+".
 - **Project count:** Rob cannot name a number. Do not state one. The current "20+ Projects Completed" stat must go.
-- **Projects (3), all with GitHub links:**
-  - AI Spotify Playlist Generator. Live on Vercel. Next.js, Node, TypeScript, OpenAI, Spotify API.
-  - The Charleston Wedding Band. Live at thecharlestonweddingband.com. Next.js, Resend, TypeScript.
-  - Key Drums. GitHub only. HTML, CSS.
+- **Projects (3):**
+  - Naba. Live at nabaflow.io, iOS app on the App Store (apps.apple.com/us/app/nabaflow/id6761624940, listed under seller Zachary Bedell; the listing's seller URL is nabaflow.io and the bundle id is com.nabaflow.app). Gig and band management for working musicians. Stack per the naba-sec skill: Next.js UI, Express/TypeScript APIs with Prisma on Postgres, Auth0, SwiftUI iOS app, deployed on Fly. Closed source apart from naba-events-api; no Source link shown.
+  - AI Spotify Playlist Generator. Live on Vercel (spotify-playlist-generator-rob-roysons-projects.vercel.app). Next.js, Node, TypeScript, OpenAI, Spotify API. Public repo.
+  - The Charleston Wedding Band. Live at thecharlestonweddingband.com. Next.js, Resend, TypeScript. Public repo.
+  - Key Drums was removed from the page on 2026-09-01 at Rob's request; the repo still exists.
 - **Skills list:** `src/data/skills.ts`, grouped into three streams (backend, web, ai): Java, Node, Express, Kafka, Postgres, Mongo, Maven, Docker, Kubernetes, AWS, Jenkins, GitHub Actions, Git; React, Next.js, TypeScript, JavaScript, Tailwind, HTML, CSS; OpenAI, Claude, MCP, Cursor.
 - **Absent, do not fabricate:** employer names, testimonials, client quotes, case-study metrics, download counts, press, certifications, a resume file.
 

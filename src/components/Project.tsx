@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import type { Project as ProjectData } from '@/data/projects'
 import { streams } from '@/data/skills'
-import { ArrowIcon, GitHubIcon } from './icons'
+import { AppleIcon, ArrowIcon, GitHubIcon } from './icons'
 
 /** Technology name -> its stream, so each tag carries that stream's hue. */
 const STREAM_OF = new Map(streams.flatMap((s) => s.items.map((item) => [item, s.id] as const)))
 
 /** One project row: a real capture of the work, a title that links to it, description, tech. */
 export function Project({ project }: { project: ProjectData }) {
-  const primary = project.demoUrl ?? project.githubUrl
+  const primary = project.demoUrl ?? project.appStoreUrl ?? project.githubUrl
 
   return (
     <article className='row'>
@@ -43,7 +43,18 @@ export function Project({ project }: { project: ProjectData }) {
           ))}
           <span className='ml-auto flex items-center gap-3 text-xs font-medium text-mute'>
             <span>{project.status === 'Live' ? 'Live' : 'Local only'}</span>
-            {project.demoUrl && (
+            {project.appStoreUrl && (
+              <a
+                href={project.appStoreUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='link inline-flex items-center gap-1.5 hover:text-ink'
+              >
+                <AppleIcon />
+                App Store
+              </a>
+            )}
+            {project.demoUrl && project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target='_blank'

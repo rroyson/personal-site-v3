@@ -70,7 +70,7 @@ calm, serious, finished, warm at one point
 
 ## Assets
 - Anchor asset: `public/profile.jpeg` (460x460, real photo), shown at 72px in the aside
-- Project captures: `public/projects/*.jpg`, 1280x800 browser captures of the real sites at 1280px, JPEG q80. Spotify generator captured from a local run of the repo because the Vercel preview URL is behind SSO.
+- Project captures: `public/projects/*.jpg`, 1280x800 browser captures of the real sites at 1280px, JPEG q80. Naba captured from nabaflow.io (2026-09-01, replaced Key Drums). Spotify generator captured from a local run of the repo because the preview URL was behind SSO at the time.
 - Asset style: real captures only, shown desaturated at rest and in color on hover (they were too loud against the palette in full color); no illustration, no stock photography, no icon set beyond the two brand glyphs and the arrow drawn in `icons.tsx`
 - Illustration vs. photography split: none. Nothing on this page is conceptual enough to need illustration.
 - Logo: `src/app/icon.svg`, a three-node constellation in amber on ground, constructed 2026-09-01 (no prior mark existed; the previous favicon was the create-next-app default). `src/app/apple-icon.png` rendered from it. OG card `public/og.png` uses the same mark.
