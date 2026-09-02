@@ -1,227 +1,156 @@
-import { SkillCarousel } from '@/components/SkillCarousel'
-import { ProjectCard } from '@/components/ProjectCard'
+import Image from 'next/image'
+import { Constellation } from '@/components/Constellation'
+import { SectionNav } from '@/components/SectionNav'
+import { Project } from '@/components/Project'
 import { ContactForm } from '@/components/ContactForm'
+import { GitHubIcon, LinkedInIcon } from '@/components/icons'
 import { projects } from '@/data/projects'
-import { skills } from '@/data/skills'
+import { streams, type StreamId } from '@/data/skills'
+
+/** Each stream owns a hue; amber (web) is also the page's action color. */
+const STREAM_TEXT: Record<StreamId, string> = {
+  backend: 'text-backend',
+  web: 'text-amber',
+  ai: 'text-ai',
+}
+
+const SOCIALS = [
+  { href: 'https://github.com/rroyson', label: 'GitHub', Icon: GitHubIcon },
+  { href: 'https://www.linkedin.com/in/rroyson/', label: 'LinkedIn', Icon: LinkedInIcon },
+]
+
+/** A sticky label on phones; invisible on desktop, where the aside nav already names the section. */
+function SectionHead({ children }: { children: string }) {
+  return (
+    <h2 className='label sticky top-0 z-20 -mx-6 mb-5 bg-ground/85 px-6 py-4 text-ink backdrop-blur md:sr-only'>
+      {children}
+    </h2>
+  )
+}
 
 export default function Home() {
   return (
-    <div className='min-h-screen bg-gray-50 dark:bg-gray-900'>
-      {/* Header */}
-      <header className='bg-white dark:bg-gray-800 shadow-sm'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='flex justify-between items-center py-6'>
-            <div className='flex items-center'>
-              <div className='text-2xl font-bold text-gray-900 dark:text-white'>
-                Rob Royson
-              </div>
-              <div className='ml-4 text-gray-600 dark:text-gray-400'>
-                Software Developer
-              </div>
-            </div>
-            <nav className='flex space-x-6'>
-              <a
-                href='#about'
-                className='text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors'
-              >
-                About
-              </a>
-              <a
-                href='#projects'
-                className='text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors'
-              >
-                Projects
-              </a>
-              <a
-                href='#contact'
-                className='text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors'
-              >
-                Contact
-              </a>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section className='py-20 px-4 sm:px-6 lg:px-8'>
-        <div className='max-w-7xl mx-auto'>
-          <div className='text-center'>
-            <h1 className='text-4xl sm:text-6xl font-bold text-gray-900 dark:text-white mb-6'>
-              Building the Future,
-              <br />
-              <span className='text-blue-600 dark:text-blue-400'>
-                One App at a Time
-              </span>
+    <>
+      <Constellation />
+      <div className='relative z-10 mx-auto grid max-w-6xl grid-cols-1 px-6 md:grid-cols-12 md:gap-16 md:px-10'>
+        <aside className='pt-14 pb-6 md:sticky md:top-0 md:col-span-5 md:flex md:h-dvh md:min-h-[640px] md:flex-col md:justify-between md:pt-22 md:pb-18'>
+          <div className='enter'>
+            <Image
+              src='/profile.jpeg'
+              alt='Rob Royson'
+              width={72}
+              height={72}
+              priority
+              className='mb-6 rounded-lg border border-line'
+            />
+            <h1 className='text-[2.5rem] leading-none font-bold tracking-tight text-ink md:text-[2.875rem]'>
+              Rob Royson
             </h1>
-            <p className='text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto'>
-              I&apos;m a passionate software developer with expertise in modern
-              web technologies. I create scalable, user-friendly applications
-              that solve real-world problems.
+            <p className='mt-3.5 text-xl font-medium text-ink'>Software Developer</p>
+            <p className='mt-4 max-w-[34ch] leading-relaxed'>
+              Ten years shipping software, from startups to enterprise.{' '}
+              <span className='text-backend'>Backend that deploys</span>,{' '}
+              <span className='text-amber'>web that ships</span>,{' '}
+              <span className='text-ai'>AI built in</span>.
             </p>
-            <div className='flex flex-col sm:flex-row gap-4 justify-center items-center mb-12'>
-              <a
-                href='#projects'
-                className='bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200'
-              >
-                View My Work
-              </a>
-              <a
-                href='#contact'
-                className='border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 px-8 py-3 rounded-lg font-medium transition-colors duration-200'
-              >
-                Get In Touch
-              </a>
-            </div>
-            <div className='flex justify-center'>
-              <SkillCarousel />
-            </div>
+            <SectionNav />
           </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section
-        id='about'
-        className='py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800'
-      >
-        <div className='max-w-7xl mx-auto'>
-          <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-gray-900 dark:text-white mb-4'>
-              About Me
-            </h2>
-          </div>
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 items-center'>
-            {/* Left Column: About Text */}
-            <div>
-              <p className='text-gray-600 dark:text-gray-300 mb-6'>
-                With several years of experience in software development, I
-                specialize in creating robust, scalable applications using
-                modern technologies. My passion lies in solving complex problems
-                and turning ideas into reality through code.
-              </p>
-              <p className='text-gray-600 dark:text-gray-300 mb-6'>
-                I have a strong background in both frontend and backend
-                development, with expertise in React, Node.js, TypeScript, and
-                cloud technologies. I&apos;m always eager to learn new
-                technologies and take on challenging projects.
-              </p>
-              <div className='grid grid-cols-2 gap-4'>
-                <div className='bg-gray-50 dark:bg-gray-700 p-4 rounded-lg'>
-                  <div className='text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1'>
-                    5+
-                  </div>
-                  <div className='text-gray-600 dark:text-gray-300'>
-                    Years Experience
-                  </div>
-                </div>
-                <div className='bg-gray-50 dark:bg-gray-700 p-4 rounded-lg'>
-                  <div className='text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1'>
-                    20+
-                  </div>
-                  <div className='text-gray-600 dark:text-gray-300'>
-                    Projects Completed
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Technical Skills */}
-            <div className='bg-gray-100 dark:bg-gray-700 p-8 rounded-lg h-fit'>
-              <h3 className='text-xl font-semibold text-gray-900 dark:text-white mb-6'>
-                Technical Skills
-              </h3>
-              <div className='grid grid-cols-3 gap-3'>
-                {skills.map((skill) => (
-                  <div
-                    key={skill}
-                    className='flex items-center p-2 bg-white dark:bg-gray-600 rounded-lg shadow-sm'
-                  >
-                    <div className='flex-1 text-gray-700 dark:text-gray-300 text-xs text-center'>
-                      {skill}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id='projects' className='py-20 px-4 sm:px-6 lg:px-8'>
-        <div className='max-w-7xl mx-auto'>
-          <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-gray-900 dark:text-white mb-4'>
-              Featured Projects
-            </h2>
-            <p className='text-gray-600 dark:text-gray-300 max-w-2xl mx-auto'>
-              Here are some of the projects I&apos;ve worked on recently. Each
-              represents a unique challenge and showcases different aspects of
-              my development skills.
-            </p>
-          </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-            {projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
+          <ul className='enter-last mt-8 flex gap-5 text-sm font-medium md:mt-0'>
+            {SOCIALS.map(({ href, label, Icon }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='link inline-flex items-center gap-2 text-mute hover:text-ink'
+                >
+                  <Icon />
+                  {label}
+                </a>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
+        </aside>
 
-      {/* Contact Section */}
-      <section
-        id='contact'
-        className='py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800'
-      >
-        <div className='max-w-7xl mx-auto'>
-          <div className='text-center mb-12'>
-            <h2 className='text-3xl font-bold text-gray-900 dark:text-white mb-4'>
-              Let&apos;s Work Together
-            </h2>
-            <p className='text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto'>
-              I&apos;m always interested in hearing about new opportunities and
-              exciting projects. Whether you have a project in mind or just want
-              to chat about technology, feel free to reach out.
-            </p>
-          </div>
-          
-          <ContactForm />
-          
-          <div className='text-center mt-12'>
-            <p className='text-gray-600 dark:text-gray-400 mb-6'>
-              Or connect with me on social media
-            </p>
-            <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-              <a
-                href='https://www.linkedin.com/in/rroyson/'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 px-6 py-2 rounded-lg font-medium transition-colors duration-200'
-              >
-                LinkedIn
-              </a>
-              <a
-                href='https://github.com/rroyson'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 px-6 py-2 rounded-lg font-medium transition-colors duration-200'
-              >
-                GitHub
-              </a>
+        <main id='main' className='pt-6 pb-16 md:col-span-7 md:pt-22 md:pb-20'>
+          <section id='about' className='mb-24 scroll-mt-20'>
+            <SectionHead>About</SectionHead>
+            <div className='space-y-4 leading-relaxed'>
+              <p>
+                I&rsquo;m a software developer with{' '}
+                <b className='font-medium text-ink'>ten years</b> of delivering
+                scalable systems in fast-paced environments, from startups to
+                enterprise corporations.
+              </p>
+              <p>
+                I&rsquo;ve built <b className='font-medium text-ink'>Java and Node services</b>{' '}
+                and the <b className='font-medium text-ink'>CI pipelines</b> that deploy
+                them to Kubernetes on AWS, shipped complete web products in{' '}
+                <b className='font-medium text-ink'>React, Next.js, and TypeScript</b>,
+                and built AI in from the start with{' '}
+                <b className='font-medium text-ink'>OpenAI, Claude, and MCP servers</b>.
+                Open to full-time engineering roles; the right contract build is
+                welcome too.
+              </p>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* Footer */}
-      <footer className='bg-gray-100 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8'>
-        <div className='max-w-7xl mx-auto text-center'>
-          <p className='text-gray-600 dark:text-gray-400'>
-            © 2024 Rob Royson. Built with Next.js and Tailwind CSS.
-          </p>
-        </div>
-      </footer>
-    </div>
+          <section id='streams' className='mb-24 scroll-mt-20'>
+            <SectionHead>Streams</SectionHead>
+            <div className='space-y-10'>
+              {streams.map((stream) => (
+                <div key={stream.id} className='grid gap-2 md:grid-cols-[120px_1fr] md:gap-5'>
+                  <p className={`label pt-1 ${STREAM_TEXT[stream.id]}`}>{stream.label}</p>
+                  <div>
+                    <h3 className='text-[17px] font-medium text-ink'>{stream.title}</h3>
+                    <p className='mt-2 text-[15px] leading-relaxed'>{stream.blurb}</p>
+                    <p className='mt-3 text-sm leading-relaxed text-mute'>
+                      {stream.items.join(', ')}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id='projects' className='mb-24 scroll-mt-20'>
+            <SectionHead>Projects</SectionHead>
+            <div className='space-y-2'>
+              {projects.map((project) => (
+                <Project key={project.title} project={project} />
+              ))}
+            </div>
+          </section>
+
+          <section id='contact' className='scroll-mt-20'>
+            <SectionHead>Contact</SectionHead>
+            <p className='mb-8 max-w-[60ch] leading-relaxed'>
+              Hiring for an engineering role, or have a build in mind? Send a
+              note and it lands in my inbox.
+            </p>
+            <ContactForm />
+            <p className='mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm'>
+              <span className='text-mute'>Or find me on</span>
+              {SOCIALS.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='link inline-flex items-center gap-2 font-medium text-ink hover:text-amber'
+                >
+                  <Icon />
+                  {label}
+                </a>
+              ))}
+            </p>
+          </section>
+
+          <footer className='mt-24 text-xs text-mute'>
+            &copy; {new Date().getFullYear()} Rob Royson. Built with Next.js.
+          </footer>
+        </main>
+      </div>
+    </>
   )
 }

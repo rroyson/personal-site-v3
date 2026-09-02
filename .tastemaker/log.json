@@ -1,0 +1,12 @@
+[
+  {
+    "date": "2026-09-01",
+    "page": "portfolio",
+    "macrostructure": "Split Diptych",
+    "nav": "aside rule-line list",
+    "hero": "statement aside (photo, name, role, one line)",
+    "footer": "one line",
+    "knobs": "hero=left-sticky/photo-72/socials-pinned; proof=rows-with-real-captures; range=label-column/plain-text-lists; section-heads=phone-only",
+    "brief": "Rob Royson · developer portfolio, Spotlight canon, dark, one amber accent"
+  }
+]
