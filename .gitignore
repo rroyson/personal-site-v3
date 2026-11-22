@@ -49,3 +49,7 @@ next-env.d.ts
 
 # impeccable skill state
 .impeccable
+
+# design tool state
+.tastemaker
+PRODUCT.md
