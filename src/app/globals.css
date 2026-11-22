@@ -1,31 +1,24 @@
-/* tastemaker · macrostructure: Split Diptych · mood: technical (dark, canon developer portfolio) · page: portfolio
- * arc: hook(aside statement) -> about(prose) -> range(streams index) -> proof(projects, real captures) -> close(contact + socials)
- * nav: sticky rule-line list in the aside · hero: statement aside · footer: one line
- * palette: hand-set Spotlight canon (ground #0d1117, amber #f0b64a) + stream hues (backend #7fb2ff, ai #b9a0ff) · contrast: pass (matrix; mute nudged #6e7a89 -> #7b8794 to clear 4.5:1)
- * critique: ShowTell 4 · Phil 4 · Hier 4 · Spec 4 · Restr 5 · Var 4 */
 @import 'tailwindcss';
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
 
-  --color-ground: #0d1117;
-  --color-ink: #e6edf3;
-  --color-body: #a3adba;
-  --color-mute: #7b8794;
-  --color-amber: #f0b64a;
-  --color-amber-bright: #ffc85e;
-  --color-line: rgba(255, 255, 255, 0.08);
-  --color-line-strong: rgba(255, 255, 255, 0.16);
-  --color-lift: rgba(255, 255, 255, 0.035);
-  --color-amber-tint: rgba(240, 182, 74, 0.1);
-  --color-well: #131a24;
-
-  /* Stream hues name the three streams; amber alone acts. */
-  --color-backend: #7fb2ff;
-  --color-backend-tint: rgba(127, 178, 255, 0.12);
-  --color-ai: #b9a0ff;
-  --color-ai-tint: rgba(185, 160, 255, 0.12);
+  --color-ground: #0b0d11;
+  --color-surface: #12151b;
+  --color-shot: #1a1f28;
+  --color-ink: #eef1f5;
+  --color-soft: #cdd3dc;
+  --color-body: #b4bcc8;
+  --color-mute: #8892a0;
+  --color-accent: #4aa8ff;
+  --color-accent-bright: #7bc0ff;
+  --color-accent-line: rgba(74, 168, 255, 0.4);
+  --color-accent-tint: rgba(74, 168, 255, 0.06);
+  --color-line: rgba(238, 241, 245, 0.08);
+  --color-line-strong: rgba(238, 241, 245, 0.16);
+  --color-line-button: rgba(238, 241, 245, 0.22);
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -33,7 +26,10 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  /* Anchored sections clear the sticky header. */
+  scroll-padding-top: 76px;
   overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -42,11 +38,17 @@ body {
 }
 
 ::selection {
-  background: var(--color-amber);
+  background: var(--color-accent);
   color: var(--color-ground);
 }
 
-/* Keyboard users get a way past the aside. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Keyboard users get a way past the header. */
 .skip {
   position: absolute;
   top: 1rem;
@@ -54,7 +56,7 @@ body {
   z-index: 50;
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
-  background: var(--color-amber);
+  background: var(--color-accent);
   color: var(--color-ground);
   font-size: 0.875rem;
   font-weight: 600;
@@ -65,201 +67,62 @@ body {
   transform: none;
 }
 
-/* Nav items and phone-only section labels share one voice. */
-.label {
-  font-size: 0.75rem;
+/* Section eyebrow: "01 — WORK". */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+}
+
+.heading {
+  font-family: var(--font-display);
   font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
 }
 
-/* Two curves on the whole page: ease for color, --ease-out for movement. */
-.link {
-  transition: color 150ms ease;
-}
-
-/* First paint: the aside rises in, 40ms apart. Seen once per visit. */
-.enter > * {
-  animation: rise 300ms var(--ease-out) both;
-}
-
-.enter > :nth-child(2) {
-  animation-delay: 40ms;
-}
-
-.enter > :nth-child(3) {
-  animation-delay: 80ms;
-}
-
-.enter > :nth-child(4) {
-  animation-delay: 120ms;
-}
-
-.enter > :nth-child(5) {
-  animation-delay: 160ms;
-}
-
-.enter-last {
-  animation: rise 300ms var(--ease-out) 200ms both;
-}
-
-/* The content column fades in on the same clock so both columns arrive as one composition. */
-main {
-  animation: fade 300ms var(--ease-out) both;
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-}
-
-/* The constellation fades in once its first frame is drawn, instead of popping in after hydration. */
-.constellation {
-  opacity: 0;
-  transition: opacity 600ms ease-out;
-}
-
-.constellation[data-ready] {
-  opacity: 1;
-}
-
-/* A project row: a capture of the work beside its text, the whole row one link target. */
-.row {
-  position: relative;
-  display: grid;
-  gap: 1.25rem;
-  padding: 1.125rem 1rem;
-  margin: 0 -1rem;
-  border-radius: 8px;
-  transition: background-color 150ms ease;
-}
-
-/* The hover hairline lives on a pseudo-element so only opacity animates. */
-.row::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-  border: 1px solid var(--color-line);
-  opacity: 0;
-  transition: opacity 150ms ease;
-  pointer-events: none;
-}
-
-@media (min-width: 48rem) {
-  .row {
-    grid-template-columns: 160px 1fr;
-  }
-}
-
-.row:focus-within {
-  background: var(--color-lift);
-}
-
-.row:focus-within::before {
-  opacity: 1;
-}
-
-.row .title {
-  transition: color 150ms ease;
-}
-
-.row .arrow {
+.tag {
   display: inline-block;
-  transition:
-    transform 200ms var(--ease-out),
-    color 150ms ease;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 6px;
+  padding: 3px 9px;
 }
 
-/* Captures rest in the page's own gray and come back to color on hover or focus. */
-.row .thumb {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-  border: 1px solid var(--color-line);
-  background: var(--color-well);
-  filter: grayscale(1);
-  opacity: 0.75;
-  transition:
-    border-color 200ms ease,
-    opacity 200ms ease,
-    filter 200ms ease;
+.chip {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  border: 1px solid rgba(238, 241, 245, 0.14);
+  border-radius: 6px;
+  padding: 4px 10px;
 }
 
-.row:focus-within .thumb {
-  filter: none;
-  opacity: 1;
-  border-color: var(--color-line-strong);
-}
-
-/* Stretched link: the title's link covers the whole row. */
-.row .stretch::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 8px;
-}
-
-/* Tags carry the hue of the stream their technology belongs to; unmatched tags stay neutral. */
-.pill {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--color-body);
-  background: var(--color-line);
-  border-radius: 9999px;
-  padding: 0.3rem 0.7rem;
-  line-height: 1.2;
-}
-
-.pill[data-stream='backend'] {
-  color: var(--color-backend);
-  background: var(--color-backend-tint);
-}
-
-.pill[data-stream='web'] {
-  color: var(--color-amber);
-  background: var(--color-amber-tint);
-}
-
-.pill[data-stream='ai'] {
-  color: var(--color-ai);
-  background: var(--color-ai-tint);
-}
-
+/* Buttons: pill, 52px tall, press scales down briefly. */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9375rem;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 9999px;
   font-weight: 600;
-  color: var(--color-ground);
-  background: var(--color-amber);
-  border-radius: 6px;
-  padding: 0.75rem 1.125rem;
-  line-height: 1.2;
+  font-size: 16px;
   transition:
     background-color 150ms ease,
-    opacity 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
     transform 160ms var(--ease-out);
 }
 
-/* Press lands in 60ms; the release eases back over the base 160ms. */
 .btn:active:not(:disabled) {
   transform: scale(0.97);
-  transition:
-    background-color 150ms ease,
-    opacity 150ms ease,
-    transform 60ms var(--ease-out);
+  transition-duration: 60ms;
 }
 
 .btn:disabled {
@@ -267,52 +130,77 @@ main {
   cursor: not-allowed;
 }
 
-/* Both labels share one cell so the button never changes width; the inactive one blurs out. */
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-ground);
+}
+
+.btn-ghost {
+  border: 1px solid var(--color-line-button);
+  color: var(--color-ink);
+}
+
+/* Both labels share one cell so the button never changes width. */
 .btn-labels {
   display: grid;
 }
 
 .btn-labels > * {
   grid-area: 1 / 1;
-  transition:
-    opacity 150ms ease,
-    filter 150ms ease;
+  transition: opacity 150ms ease;
 }
 
 .btn-labels > [aria-hidden='true'] {
   opacity: 0;
-  filter: blur(2px);
 }
 
+.link {
+  transition: color 150ms ease;
+}
+
+/* Projects: a swipeable rail on phones, a grid from md up. */
+.rail {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+/* On phones, long descriptions clamp so cards in the rail stay one height. */
+@media (max-width: 47.99rem) {
+  .clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Composer-style form fields: no boxes, the row tints while focused. */
 .field {
-  width: 100%;
-  border: 1px solid var(--color-line);
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--color-ink);
-  padding: 0.75rem 0.875rem;
-  line-height: 1.4;
-  transition: border-color 150ms ease;
+  transition: background-color 150ms ease;
 }
 
-.field::placeholder {
-  color: var(--color-mute);
+.field:focus-within {
+  background: var(--color-accent-tint);
 }
 
-/* Focus is a keyboard action, so it lands instantly on the border; the ring is for everything else. */
-.field:focus-visible {
+.field input,
+.field textarea {
   outline: none;
-  border-color: var(--color-amber);
-  transition: none;
 }
 
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--color-amber);
-  outline-offset: 3px;
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #6f7988;
 }
 
-/* The form's one message rises in when it mounts. */
+.grow-field {
+  field-sizing: content;
+}
+
 .status {
   transition:
     opacity 200ms var(--ease-out),
@@ -326,114 +214,32 @@ button:focus-visible {
   }
 }
 
-/* Nav rule-lines: a fixed 4rem box drawn at half, grown to full when active or hovered. */
-.navlink {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  color: var(--color-mute);
-  transition: color 150ms ease;
+.chev {
+  transition: transform 200ms var(--ease-out);
 }
 
-.navlink::before {
-  content: '';
-  width: 4rem;
-  height: 1px;
-  background: var(--color-mute);
-  transform: scaleX(0.5);
-  transform-origin: left;
-  transition:
-    transform 180ms var(--ease-out),
-    background-color 150ms ease;
-}
-
-.navlink[aria-current='true'] {
-  color: var(--color-ink);
-}
-
-.navlink[aria-current='true']::before {
-  transform: none;
-  background: var(--color-ink);
-}
-
-/* Hover motion only where a pointer can hover. */
 @media (hover: hover) and (pointer: fine) {
-  .row:hover {
-    background: var(--color-lift);
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-accent-bright);
   }
 
-  .row:hover::before {
-    opacity: 1;
-  }
-
-  .row:hover .title,
-  .row:hover .arrow {
-    color: var(--color-amber);
-  }
-
-  .row:hover .arrow {
-    transform: translate(3px, -3px);
-  }
-
-  .row:hover .thumb {
-    filter: none;
-    opacity: 1;
-    border-color: var(--color-line-strong);
-  }
-
-  .btn:hover:not(:disabled) {
-    background: var(--color-amber-bright);
-  }
-
-  .field:hover {
-    border-color: var(--color-line-strong);
-  }
-
-  .navlink:hover {
-    color: var(--color-ink);
-  }
-
-  .navlink:hover::before {
-    transform: none;
-    background: var(--color-ink);
+  .btn-ghost:hover {
+    border-color: var(--color-ink);
   }
 }
 
-/* Reduced motion keeps the color and opacity feedback and drops the movement. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .enter > *,
-  .enter-last {
-    animation-name: fade;
-  }
-
-  .row .arrow {
-    transition: color 150ms ease;
-  }
-
-  .row:hover .arrow {
-    transform: none;
-  }
-
   .btn,
   .btn:active:not(:disabled) {
-    transition:
-      background-color 150ms ease,
-      opacity 150ms ease;
-  }
-
-  .btn:active:not(:disabled) {
     transform: none;
   }
 
+  .chev,
   .status {
-    transition: opacity 200ms var(--ease-out);
-  }
-
-  .navlink::before {
-    transition: background-color 150ms ease;
+    transition: none;
   }
 }

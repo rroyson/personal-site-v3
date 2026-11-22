@@ -1,47 +1,44 @@
-export type StreamId = 'backend' | 'web' | 'ai'
-
-export interface Stream {
-  id: StreamId
-  label: string
+export interface SkillGroup {
+  id: string
   title: string
   blurb: string
+  /** Shown first, outlined in the accent. */
+  core?: string[]
   items: string[]
 }
 
-export const streams: Stream[] = [
+export const skillGroups: SkillGroup[] = [
   {
-    id: 'backend',
-    label: 'Backend',
-    title: 'Commit to production',
-    blurb: 'Java and Node services, and the CI/CD that takes every merge to production.',
-    items: [
-      'Java',
-      'Node.js',
-      'Express',
-      'Docker',
-      'Kubernetes',
-      'AWS',
-      'GitHub Actions',
-      'Jenkins',
-      'Kafka',
-      'PostgreSQL',
-      'MongoDB',
-      'Maven',
-      'Git',
-    ],
+    id: 'ai',
+    title: 'AI',
+    blurb: 'Agentic pipelines, agent harnesses and the tools agents call, across hosted and local models.',
+    core: ['Agentic pipelines', 'Agent harnesses', 'MCP servers', 'Tool calling'],
+    items: ['OpenAI', 'Anthropic', 'Gemini', 'Local LLMs', 'Ollama', 'Hugging Face'],
   },
   {
     id: 'web',
-    label: 'Web',
-    title: 'Products that ship',
-    blurb: 'Complete, fast web products, end to end.',
-    items: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML', 'CSS'],
+    title: 'Web & Mobile',
+    blurb: 'Web apps and native iOS apps, front to back.',
+    items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Swift', 'SwiftUI', 'iOS'],
   },
   {
-    id: 'ai',
-    label: 'AI',
-    title: 'Built in, not bolted on',
-    blurb: 'LLM features designed into the product from the first commit.',
-    items: ['OpenAI', 'Claude', 'MCP Server', 'Cursor'],
+    id: 'backend',
+    title: 'Backend',
+    blurb: 'Services, APIs and data.',
+    items: ['Java', 'Node.js', 'Express', 'Kafka', 'PostgreSQL', 'MongoDB'],
+  },
+  {
+    id: 'cicd',
+    title: 'CI/CD & Infra',
+    blurb: 'Pipelines and containers, with continuous deployment.',
+    items: [
+      'Continuous deployment',
+      'Jenkins',
+      'GitHub Actions',
+      'Kubernetes',
+      'Docker',
+      'AWS',
+      'Maven',
+    ],
   },
 ]
