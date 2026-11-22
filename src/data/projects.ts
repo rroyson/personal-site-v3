@@ -3,19 +3,38 @@ export interface Project {
   description: string
   tech: string[]
   status: 'Live' | 'Local'
-  githubUrl: string
+  /** Short platform or area label shown as a tag, e.g. "Web + iOS". */
+  kind: string
+  /** The one project shown full-width first. */
+  featured?: boolean
+  /** Public source, when there is one. Closed-source products omit it. */
+  githubUrl?: string
   demoUrl?: string
+  appStoreUrl?: string
   /** A real capture of the project, 1280x800, in public/projects. */
   image: string
 }
 
 export const projects: Project[] = [
   {
+    title: 'Naba',
+    description:
+      'Gig and band management for working musicians. Google Calendar sync, crew availability, setlists, run of show, and a venue CRM, on the web and on iOS.',
+    tech: ['Next.js', 'TypeScript', 'Express', 'PostgreSQL', 'SwiftUI'],
+    status: 'Live',
+    kind: 'Web + iOS',
+    featured: true,
+    demoUrl: 'https://nabaflow.io',
+    appStoreUrl: 'https://apps.apple.com/us/app/nabaflow/id6761624940',
+    image: '/projects/naba.jpg',
+  },
+  {
     title: 'AI Spotify Playlist Generator',
     description:
       'Builds a personalized Spotify playlist from a few words about your taste. OpenAI reads the prompt, the Spotify API assembles the tracks.',
     tech: ['Next.js', 'Node.js', 'TypeScript', 'OpenAI', 'Spotify API'],
     status: 'Live',
+    kind: 'AI',
     githubUrl: 'https://github.com/rroyson/spotify-playlist-generator',
     demoUrl:
       'https://spotify-playlist-generator-rob-roysons-projects.vercel.app',
@@ -27,17 +46,9 @@ export const projects: Project[] = [
       'Marketing site for a working wedding band. Booking inquiries arrive by email through Resend, and the whole thing stays fast on a phone.',
     tech: ['Next.js', 'Resend', 'TypeScript'],
     status: 'Live',
+    kind: 'Web',
     githubUrl: 'https://github.com/rroyson/DTSMB-WEBSITE-V2',
     demoUrl: 'https://thecharlestonweddingband.com',
     image: '/projects/charleston-wedding-band.jpg',
-  },
-  {
-    title: 'Key Drums',
-    description:
-      'Play a drum kit with your keyboard. Plain HTML and CSS, no build step, no framework.',
-    tech: ['HTML', 'CSS'],
-    status: 'Local',
-    githubUrl: 'https://github.com/rroyson/key-drums',
-    image: '/projects/key-drums.jpg',
   },
 ]
