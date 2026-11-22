@@ -37,18 +37,35 @@ export function GitHubIcon() {
   )
 }
 
-export function AppleIcon() {
-  return (
-    <svg aria-hidden='true' className='h-4 w-4' viewBox='0 0 24 24' fill='currentColor'>
-      <path d='M16.365 12.77c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.71-3.19-1.73-1.36-.14-2.65.8-3.34.8-.69 0-1.75-.78-2.88-.76-1.48.02-2.85.86-3.61 2.19-1.54 2.67-.39 6.62 1.11 8.79.73 1.06 1.6 2.25 2.74 2.21 1.1-.04 1.52-.71 2.85-.71s1.7.71 2.87.69c1.18-.02 1.93-1.08 2.65-2.14.84-1.23 1.18-2.42 1.2-2.48-.03-.01-2.3-.88-2.32-3.55zM14.17 6.3c.61-.74 1.02-1.76.9-2.78-.88.04-1.94.58-2.57 1.32-.56.65-1.06 1.7-.93 2.7.98.08 1.98-.5 2.6-1.24z' />
-    </svg>
-  )
-}
 
 export function LinkedInIcon() {
   return (
     <svg aria-hidden='true' className='h-4 w-4' viewBox='0 0 24 24' fill='currentColor'>
       <path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' />
+    </svg>
+  )
+}
+
+export function ChevronIcon() {
+  return (
+    <svg aria-hidden='true' className='h-5 w-5' viewBox='0 0 24 24' {...stroke}>
+      <path d='m6 9 6 6 6-6' />
+    </svg>
+  )
+}
+
+export function ArrowRightIcon() {
+  return (
+    <svg aria-hidden='true' className='h-[18px] w-[18px]' viewBox='0 0 24 24' {...stroke}>
+      <path d='M5 12h14M13 6l6 6-6 6' />
+    </svg>
+  )
+}
+
+export function ArrowDownIcon() {
+  return (
+    <svg aria-hidden='true' className='h-[18px] w-[18px]' viewBox='0 0 24 24' {...stroke}>
+      <path d='M12 5v14M6 13l6 6 6-6' />
     </svg>
   )
 }

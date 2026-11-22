@@ -1,20 +1,14 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+const inter = Inter({ variable: '--font-inter', subsets: ['latin'] })
+const spaceGrotesk = Space_Grotesk({ variable: '--font-space-grotesk', subsets: ['latin'] })
+const jetbrainsMono = JetBrains_Mono({ variable: '--font-jetbrains-mono', subsets: ['latin'] })
 
 const TITLE = 'Rob Royson, Software Developer'
 const DESCRIPTION =
-  'Ten years shipping software from startups to enterprise. Backend and CI/CD (Java, Node, Docker, Kubernetes, GitHub Actions, AWS), full-stack web (React, Next.js, TypeScript), and AI-integrated products (OpenAI, Claude, MCP).'
+  'Software developer in Charleston, SC. Ten years across startups and enterprise: agentic AI systems, web and iOS apps, backend services, and CI/CD.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -29,7 +23,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0d1117',
+  themeColor: '#0b0d11',
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({
@@ -38,8 +33,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className='antialiased'>
+    <html lang='en' className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+      <body className='font-sans text-[17px] leading-relaxed antialiased'>
         <a href='#main' className='skip'>
           Skip to content
         </a>
